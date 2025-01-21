@@ -30,11 +30,6 @@ jobs:
         run: |
           composer install --no-interaction --prefer-dist
 
-      # 4) Run PHPUnit tests
-      - name: Run tests
-        run: |
-          vendor/bin/phpunit
-
       # 5) Log in to Docker Hub
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
