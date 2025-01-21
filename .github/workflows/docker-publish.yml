@@ -30,7 +30,7 @@ jobs:
         run: |
           composer install --no-interaction --prefer-dist
 
-      # 4) Run PHPUnit tests (assuming you have them set up)
+      # 4) Run PHPUnit tests
       - name: Run tests
         run: |
           vendor/bin/phpunit
