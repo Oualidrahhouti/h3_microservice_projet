@@ -80,11 +80,9 @@ This repository demonstrates a **Symfony** microservice with **Nginx + PHP-FPM**
 
 ## Project Structure
 
+```
 . ├─ docker/ │ ├─ php-nginx/ │ │ ├─ Dockerfile │ │ └─ nginx.conf │ └─ database/ │ └─ Dockerfile ├─ src/ │ ├─ Controller/ │ │ ├─ DefaultController.php │ │ └─ HealthController.php │ ├─ Entity/ │ ├─ Repository/ ├─ templates/ │ ├─ default/ │ │ ├─ home.html.twig │ │ └─ about.html.twig ├─ tests/ │ └─ ExampleTest.php ├─ docker-compose.yml ├─ composer.json ├─ README.md └─ ...
-
-yaml
-Copier
-
+```
 ---
 
 ## Requirements
