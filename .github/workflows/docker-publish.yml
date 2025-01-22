@@ -31,7 +31,7 @@ jobs:
           composer install --no-interaction --prefer-dist
 
       - name: Run tests
-        run: php bin/phpunit tests/
+        run: php vendor/bin/phpunit tests/
 
       # 5) Log in to Docker Hub
       - name: Log in to Docker Hub
