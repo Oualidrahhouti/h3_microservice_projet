@@ -7,15 +7,20 @@ services:
       dockerfile: docker/php-nginx/Dockerfile
     container_name: symfony_app
     ports:
-      - "8080:80" # Access your Symfony app at http://localhost:8080
+      - "8080:80"
     depends_on:
       - db
     environment:
-      # Symfony will use this to connect to the database
       DATABASE_URL: "mysql://myuser:mypassword@db:3306/mydb"
     volumes:
-      # Bind-mount your project so changes are reflected in the container in real time
       - .:/var/www/symfony
+    # Add healthcheck
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
 
   db:
     build:
@@ -28,15 +33,15 @@ services:
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
     ports:
-      - "3307:3306" # Optional. Access MySQL on localhost:3307
-    volumes:
-      - ./docker/database/init.sql:/docker-entrypoint-initdb.d/init.sql
-  phpmyadmin:
-    image: phpmyadmin
-    depends_on:
-      - db
-    ports:
-      - "8081:80"
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: password
+      - "3307:3306"
+    # Add healthcheck
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h localhost -u root -ppassword | grep 'mysqld is alive' || exit 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
