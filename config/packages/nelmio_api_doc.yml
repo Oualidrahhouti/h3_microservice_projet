@@ -1,0 +1,6 @@
+nelmio_api_doc:
+  documentation:
+    info:
+      title: "My Symfony API"
+      description: "API documentation for my service"
+      version: "1.0.0"
